@@ -1,0 +1,692 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VerseUp Bible Study</title>
+
+    <meta name="description"
+          content="A modern interactive Bible study experience with verses, questions, review, progress and Bible lookup.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+
+            <div>
+                <h1>VerseUp</h1>
+                <span>Bible Study</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+
+            <button class="nav-btn active" data-page="home">
+                <span>⌂</span>
+                Home
+            </button>
+
+            <button class="nav-btn" data-page="study">
+                <span>📖</span>
+                Bible Study
+            </button>
+
+            <button class="nav-btn" data-page="bible">
+                <span>🔎</span>
+                Bible
+            </button>
+
+            <button class="nav-btn" data-page="progress">
+                <span>📊</span>
+                Progress
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="mini-profile">
+                <div class="avatar">V</div>
+
+                <div>
+                    <strong>My Journey</strong>
+                    <small id="sideLevel">Level 1</small>
+                </div>
+            </div>
+
+            <button class="reset-btn" id="resetProgress">
+                Reset Progress
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">YOUR DAILY JOURNEY</p>
+                <h2 id="pageTitle">Grow in faith. One day at a time.</h2>
+            </div>
+
+            <div class="top-stats">
+
+                <div class="top-stat">
+                    <span>🔥</span>
+                    <strong id="topStreak">0</strong>
+                    <small>streak</small>
+                </div>
+
+                <div class="top-stat">
+                    <span>⭐</span>
+                    <strong id="topXP">0</strong>
+                    <small>XP</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- HOME PAGE -->
+        <section class="page active" id="homePage">
+
+            <div class="hero">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">TODAY'S STUDY</span>
+
+                    <h1 id="heroTitle">
+                        Trust God With Your Path
+                    </h1>
+
+                    <p id="heroDescription">
+                        Discover how trusting God can change the way you approach
+                        everyday decisions.
+                    </p>
+
+                    <button class="primary-btn" id="startStudy">
+                        Start Today's Study
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+                <div class="hero-glow"></div>
+
+                <div class="hero-cross">
+                    ✝
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">★</div>
+
+                    <div>
+                        <span>LEVEL</span>
+                        <strong id="levelStat">1</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">XP</div>
+
+                    <div>
+                        <span>TOTAL XP</span>
+                        <strong id="xpStat">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+
+                    <div>
+                        <span>COMPLETED</span>
+                        <strong id="completedStat">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">🔥</div>
+
+                    <div>
+                        <span>STREAK</span>
+                        <strong id="streakStat">0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="home-columns">
+
+                <!-- CONTINUE -->
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <span class="section-label">CONTINUE</span>
+                            <h3>Your Study Journey</h3>
+                        </div>
+
+                        <span class="purple-dot"></span>
+                    </div>
+
+                    <div class="progress-container">
+
+                        <div class="progress-info">
+                            <span>Overall Progress</span>
+                            <strong id="overallPercent">0%</strong>
+                        </div>
+
+                        <div class="progress-track">
+                            <div
+                                class="progress-fill"
+                                id="overallProgress">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="secondary-btn" id="continueStudy">
+                        Continue Study →
+                    </button>
+
+                </div>
+
+
+                <!-- DAILY CHALLENGE -->
+                <div class="challenge-card">
+
+                    <div class="challenge-top">
+                        <span>✦</span>
+                        <span>DAILY CHALLENGE</span>
+                    </div>
+
+                    <h3>Take a moment to reflect.</h3>
+
+                    <p>
+                        What is one thing you are thankful for today?
+                    </p>
+
+                    <button class="ghost-btn" id="challengeButton">
+                        Reflect Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDY PAGE -->
+        <section class="page" id="studyPage">
+
+            <div class="study-layout">
+
+                <div class="study-main">
+
+                    <!-- STUDY HEADER -->
+                    <div class="study-header">
+
+                        <div>
+                            <span class="section-label">BIBLE STUDY</span>
+
+                            <h1 id="lessonTitle">
+                                Trust God With Your Path
+                            </h1>
+
+                            <p id="lessonCategory">
+                                Faith & Trust
+                            </p>
+                        </div>
+
+                        <div class="lesson-number" id="lessonNumber">
+                            01
+                        </div>
+
+                    </div>
+
+
+                    <!-- STEP INDICATOR -->
+                    <div class="steps">
+
+                        <div class="step active" data-step="verse">
+                            <span>1</span>
+                            Verse
+                        </div>
+
+                        <div class="step-line"></div>
+
+                        <div class="step" data-step="questions">
+                            <span>2</span>
+                            Questions
+                        </div>
+
+                        <div class="step-line"></div>
+
+                        <div class="step" data-step="review">
+                            <span>3</span>
+                            Review
+                        </div>
+
+                        <div class="step-line"></div>
+
+                        <div class="step" data-step="complete">
+                            <span>4</span>
+                            Complete
+                        </div>
+
+                    </div>
+
+
+                    <!-- VERSE STEP -->
+                    <div class="study-step active" id="verseStep">
+
+                        <div class="verse-card">
+
+                            <div class="quote-mark">“</div>
+
+                            <p id="verseText">
+                                Trust in the Lord with all thine heart;
+                                and lean not unto thine own understanding.
+                            </p>
+
+                            <div class="verse-reference" id="verseReference">
+                                Proverbs 3:5
+                            </div>
+
+                        </div>
+
+
+                        <div class="lesson-explanation">
+
+                            <span class="section-label">UNDERSTAND</span>
+
+                            <h2>What does this mean?</h2>
+
+                            <p id="lessonExplanation">
+                                Faith means learning to trust God's direction,
+                                even when you cannot see the whole path ahead.
+                            </p>
+
+                        </div>
+
+
+                        <button class="primary-btn next-btn" id="toQuestions">
+                            Continue to Questions →
+                        </button>
+
+                    </div>
+
+
+                    <!-- QUESTIONS STEP -->
+                    <div class="study-step" id="questionsStep">
+
+                        <div class="question-header">
+                            <span class="section-label">CHECK YOUR UNDERSTANDING</span>
+
+                            <h2>Answer the questions</h2>
+
+                            <p>
+                                Choose the answer that best matches the lesson.
+                            </p>
+                        </div>
+
+                        <div id="questionsContainer"></div>
+
+                        <div class="question-actions">
+
+                            <button class="secondary-btn" id="backToVerse">
+                                ← Back
+                            </button>
+
+                            <button class="primary-btn" id="submitAnswers">
+                                Check Answers
+                            </button>
+
+                        </div>
+
+                        <div class="answer-result" id="answerResult"></div>
+
+                    </div>
+
+
+                    <!-- REVIEW STEP -->
+                    <div class="study-step" id="reviewStep">
+
+                        <div class="review-header">
+
+                            <div class="review-icon">
+                                ✓
+                            </div>
+
+                            <span class="section-label">
+                                REVIEW
+                            </span>
+
+                            <h2>Great work. Let's review.</h2>
+
+                            <p>
+                                Take a moment to think about what you learned.
+                            </p>
+
+                        </div>
+
+
+                        <div class="review-box">
+
+                            <h3>Today's takeaway</h3>
+
+                            <p id="reviewText">
+                                Trusting God means choosing faith even when
+                                you don't know everything that will happen next.
+                            </p>
+
+                        </div>
+
+
+                        <label class="reflection-label">
+                            Your reflection
+                        </label>
+
+                        <textarea
+                            id="reflectionInput"
+                            placeholder="What did this verse teach you today?"
+                            maxlength="500"></textarea>
+
+                        <div class="reflection-count">
+                            <span>Private reflection</span>
+                            <span id="reflectionCount">0 / 500</span>
+                        </div>
+
+
+                        <button class="primary-btn" id="completeLesson">
+                            Complete Study ✦
+                        </button>
+
+                    </div>
+
+
+                    <!-- COMPLETE STEP -->
+                    <div class="study-step" id="completeStep">
+
+                        <div class="completion-card">
+
+                            <div class="completion-icon">
+                                ✦
+                            </div>
+
+                            <span class="section-label">
+                                STUDY COMPLETE
+                            </span>
+
+                            <h1>Excellent work!</h1>
+
+                            <p>
+                                You completed today's Bible study and earned
+                                <strong id="earnedXP">50 XP</strong>.
+                            </p>
+
+                            <div class="xp-earned">
+
+                                <span>XP EARNED</span>
+
+                                <strong>
+                                    +<span id="earnedXPNumber">50</span>
+                                </strong>
+
+                            </div>
+
+                            <button class="primary-btn" id="nextLesson">
+                                Continue Journey →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LESSON SIDEBAR -->
+                <aside class="lesson-sidebar">
+
+                    <div class="lesson-sidebar-title">
+
+                        <div>
+                            <span class="section-label">
+                                YOUR JOURNEY
+                            </span>
+
+                            <h3>Lessons</h3>
+                        </div>
+
+                        <span id="lessonCount">
+                            0 / 8
+                        </span>
+
+                    </div>
+
+                    <div id="lessonList"></div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- BIBLE PAGE -->
+        <section class="page" id="biblePage">
+
+            <div class="page-heading">
+
+                <span class="section-label">THE WORD</span>
+
+                <h1>Explore the Bible</h1>
+
+                <p>
+                    Search for a passage by entering the book, chapter,
+                    and verse.
+                </p>
+
+            </div>
+
+
+            <div class="bible-search-card">
+
+                <div class="input-group">
+
+                    <label for="bookInput">Book</label>
+
+                    <input
+                        id="bookInput"
+                        type="text"
+                        placeholder="Example: John">
+
+                </div>
+
+                <div class="input-group small-input">
+
+                    <label for="chapterInput">Chapter</label>
+
+                    <input
+                        id="chapterInput"
+                        type="number"
+                        min="1"
+                        placeholder="3">
+
+                </div>
+
+                <div class="input-group small-input">
+
+                    <label for="verseInput">Verse</label>
+
+                    <input
+                        id="verseInput"
+                        type="number"
+                        min="1"
+                        placeholder="16">
+
+                </div>
+
+                <button class="primary-btn bible-search-btn" id="searchBible">
+                    Search Bible
+                </button>
+
+            </div>
+
+
+            <div class="bible-result" id="bibleResult">
+
+                <div class="bible-placeholder">
+
+                    <div class="big-book-icon">
+                        📖
+                    </div>
+
+                    <h2>Find a verse</h2>
+
+                    <p>
+                        Enter a Bible book, chapter, and verse above.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p class="api-note">
+                Bible lookup uses an online Bible service, so an internet
+                connection is required for searches.
+            </p>
+
+        </section>
+
+
+        <!-- PROGRESS PAGE -->
+        <section class="page" id="progressPage">
+
+            <div class="page-heading">
+
+                <span class="section-label">YOUR JOURNEY</span>
+
+                <h1>Your Progress</h1>
+
+                <p>
+                    See how far you've come.
+                </p>
+
+            </div>
+
+
+            <div class="level-card">
+
+                <div class="level-card-top">
+
+                    <div>
+                        <span>YOUR LEVEL</span>
+                        <h2 id="progressLevel">Level 1</h2>
+                    </div>
+
+                    <div class="level-badge">
+                        ✦
+                    </div>
+
+                </div>
+
+                <div class="level-progress-info">
+
+                    <span>
+                        <span id="progressCurrentXP">0</span> XP
+                    </span>
+
+                    <span>
+                        <span id="progressNextXP">100</span> XP
+                    </span>
+
+                </div>
+
+                <div class="progress-track large">
+                    <div
+                        class="progress-fill"
+                        id="levelProgress">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="progress-grid">
+
+                <div class="big-stat">
+                    <span>🔥</span>
+                    <strong id="progressStreak">0</strong>
+                    <small>Day Streak</small>
+                </div>
+
+                <div class="big-stat">
+                    <span>📖</span>
+                    <strong id="progressCompleted">0</strong>
+                    <small>Lessons Completed</small>
+                </div>
+
+                <div class="big-stat">
+                    <span>⭐</span>
+                    <strong id="progressXP">0</strong>
+                    <small>Total XP</small>
+                </div>
+
+            </div>
+
+
+            <div class="progress-lessons">
+
+                <span class="section-label">
+                    LESSON HISTORY
+                </span>
+
+                <h2>Your Completed Studies</h2>
+
+                <div id="historyList"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
